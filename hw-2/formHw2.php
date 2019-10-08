@@ -1,7 +1,7 @@
 <?php
 $mass = array();
 $mass['joker'] = 'the face value of the card is the largest - he is the president';
-$mass['6'] = [6, 1];
+$mass['6'] = 6;
 $mass['7'] = 7;
 $mass['8'] = 8;
 $mass['9'] = 9;
