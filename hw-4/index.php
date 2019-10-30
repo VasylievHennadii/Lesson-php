@@ -1,4 +1,5 @@
 <?php 
+session_start();
 echo 'HOMEWORK - 4<br><br>';
 echo 'Всего $max элементов<br><br>';
 ?>
@@ -31,18 +32,22 @@ $query_c = mysqli_query($connect, $sql_c);
 $res_c = mysqli_fetch_assoc($query_c);
 $max = $res_c['kol'];
 
-$page=1;
-if(empty($_GET['quantity'])){
-$_GET['quantity']=10;
-}
-$n=$_GET['quantity'];
-$pages=ceil($max/$_GET['quantity']);
 
-for ($i=1; $i<=$pages; $i++){
-    echo '<a style="margin:10px;" href="/index.php?page='.$i.'"> page '.$i.' </a>';
+$page=1;
+$n=5;
+$pages=ceil($max/$n);
+if(!empty($_GET['quantity'])){
+    $_SESSION['quantity']=$_GET['quantity'];
+    $n=$_SESSION['quantity'];    
 }
+$pages=ceil($max/$n);
 if(!empty($_GET['page'])){
     $page=$_GET['page'];
+    $n=$_SESSION['quantity'];
+    $pages=ceil($max/$n);
+}
+for ($i=1; $i<=$pages; $i++){
+    echo '<a style="margin:10px;" href="/index.php?page='.$i.'"> page '.$i.' </a>';
 }
 echo '<br><br>';
 $sql = "SELECT * FROM users ORDER BY user_id ASC LIMIT ".($page-1)*$n.", ".$n."";
@@ -50,7 +55,6 @@ $query=mysqli_query($connect, $sql);
 while($res[] = mysqli_fetch_assoc($query)){
 $users=$res;
 }
-
 foreach($users as $u){
   echo 'Name: ' .$u['user_name'].'. Password: '.$u['password'].'<br/>';
 }
