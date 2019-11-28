@@ -1,7 +1,7 @@
 <?php 
 session_start();
 echo 'HOMEWORK - 4<br><br>';
-echo 'Всего $max элементов<br><br>';
+
 ?>
 
 <form action="/index.php" method="get">
@@ -31,7 +31,7 @@ $sql_c = "SELECT COUNT(*) AS `kol` FROM `users`";
 $query_c = mysqli_query($connect, $sql_c);
 $res_c = mysqli_fetch_assoc($query_c);
 $max = $res_c['kol'];
-
+echo 'Всего '.$max.' элементов<br><br>';
 
 $page=1;
 $n=5;
