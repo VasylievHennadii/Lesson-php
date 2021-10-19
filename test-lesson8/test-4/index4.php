@@ -8,24 +8,16 @@ echo 'Вывести на экран все шестизначные счаст�
 function happyTickets()
 {
 	$result = array();
-	$k=0;
-	for($i=0;$i<=999999;$i++){		
-		$n=str_pad($i, 6, "0", STR_PAD_LEFT);
-		$leftPart = substr( (string)$n , 0, 3 );
-		$rightPart = substr( (string)$n , 3, 3 );		
-		
-		$leftSumm = $rightSumm =  0;		 
-		
-		for($j=0;$j<=strlen($leftPart)-1;$j++){
-			$leftSumm  += (int) $leftPart[$j];
-			$rightSumm += (int) $rightPart[$j];			
-		}	
-		
-		if($leftSumm == $rightSumm ){
-			$result[] = $n;	
-			$k++;		
-		}	
-	}
+	$k = 0;	
+	for($i = 1000001; $i < 2000000; $i++){			
+		$n = substr( (string)$i, 1, 6);
+		$leftSumm = $n[0] + $n[1] + $n[2];
+		$rightSumm = $n[3] + $n[4] + $n[5];
+		if($leftSumm == $rightSumm){
+			$result[] = $n;
+			$k++;			
+		}		
+	}	
 	$percentTickets = $k/1000000*100;
 	echo 'количество шестизначных счастливых билетов - '. $k;
 	echo '<br><br>';
@@ -34,6 +26,6 @@ function happyTickets()
 	return $result ? $result : false;
 }
 echo '<pre>';
-var_dump(happyTickets());
+print_r(happyTickets());
 echo '</pre>';
 ?>
